@@ -1,12 +1,10 @@
 <script>
+  import { fetchRetry } from "../utils/helpers";
   export let id;
-  let promise = fetch(
-    "https://www.superheroapi.com/api.php/2304427089625919/" + id,
-    { mode: "cors" }
-  )
-    .then(res => res.json())
-    .then(res => res.image.url)
-    .catch(err => console.log("--Error--", err));
+
+  let promise = fetchRetry(
+    "https://www.superheroapi.com/api.php/2304427089625919/" + id
+  );
 </script>
 
 <style>
@@ -42,12 +40,12 @@
   }
 </style>
 
-<div>
+<div class="card">
   {#await promise}
     <div class="card skeleton" />
-  {:then c}
-    {#if c}
-      <img class="card image" src={c} alt="batman" />
+  {:then res}
+    {#if res.image}
+      <img class="card image" src={res.image.url} alt={res.image.url} />
     {:else}
       <div class="card no_image" />
     {/if}

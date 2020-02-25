@@ -1,7 +1,7 @@
 <script>
   import Card from "../Component/Card.svelte";
 
-  const arr = new Array(20).fill(0);
+  const arr = new Array(10).fill(0);
 </script>
 
 <style>
@@ -13,6 +13,6 @@
 
 <div class="container">
   {#each arr as el, id}
-    <Card {id} />
+    <Card id={id + 1} />
   {/each}
 </div>
