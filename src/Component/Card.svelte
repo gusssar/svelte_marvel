@@ -45,7 +45,13 @@
     <div class="card skeleton" />
   {:then res}
     {#if res.image}
-      <img class="card image" src={res.image.url} alt={res.image.url} />
+      <img
+        on:error={e => {
+          e.target.src = '/img/nia.png';
+        }}
+        class="card image"
+        src={res.image.url}
+        alt={res.image.url} />
     {:else}
       <div class="card no_image" />
     {/if}
