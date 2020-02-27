@@ -1,5 +1,6 @@
 <script>
   import { fetchRetry } from "../utils/helpers";
+  import ImageWrapper from "./ImageWrapper.svelte";
   export let id;
 
   let promise = fetchRetry(
@@ -12,9 +13,6 @@
     height: 300px;
     width: 300px;
     border-radius: 15px;
-  }
-  .image {
-    object-fit: cover;
   }
   .skeleton {
     background-color: rgb(140, 140, 140);
@@ -45,13 +43,7 @@
     <div class="card skeleton" />
   {:then res}
     {#if res.image}
-      <img
-        on:error={e => {
-          e.target.src = '/img/nia.png';
-        }}
-        class="card image"
-        src={res.image.url}
-        alt={res.image.url} />
+      <ImageWrapper {res} />
     {:else}
       <div class="card no_image" />
     {/if}

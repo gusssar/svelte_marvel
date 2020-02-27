@@ -26,7 +26,6 @@ export function fetchRetry(
       return fetch(url, fetchOptions)
         .then(res => res.json())
         .then(res => {
-          console.log("fetchUrl", res.response, res.image.url);
           if (res.response === "error") {
             retry(res.response);
           }
