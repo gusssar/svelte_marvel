@@ -7,18 +7,21 @@
 
   function onMouseOver() {
     isShowDescription = true;
-    console.log("over");
   }
 
   function onMouseOut() {
     isShowDescription = false;
-    console.log("out");
   }
 </script>
 
-<div on:mouseover={onMouseOver} on:mouseoot={onMouseOut}>
+<style>
+  .image_wrapper {
+    display: block;
+    position: relative;
+  }
+</style>
+
+<div class="image_wrapper" on:mouseover={onMouseOver} on:mouseout={onMouseOut}>
   <Image src={res.image.url} alt={res.image.url} />
-  {#if isShowDescription}
-    <Description />
-  {/if}
+  <Description {isShowDescription} {res} />
 </div>
